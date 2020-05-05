@@ -1,4 +1,6 @@
+import 'package:fitness/screens/details_screen.dart';
 import 'package:fitness/widgets/bottom_navigation.dart';
+import 'package:fitness/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -29,6 +31,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context)
         .size; //size will get height and a width of our device
+
     return Scaffold(
       bottomNavigationBar: BottomNavigation(),
       body: Stack(
@@ -70,20 +73,7 @@ class HomeScreen extends StatelessWidget {
                         .display1
                         .copyWith(fontWeight: FontWeight.w900),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 30),
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        icon: SvgPicture.asset('assets/icons/search.svg'),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
+                  SearchBar(),
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
@@ -104,7 +94,13 @@ class HomeScreen extends StatelessWidget {
                         CategoryCard(
                           title: "Meditation",
                           svgSrc: 'assets/icons/Meditation.svg',
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (ctx) => DetailsScreen()),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Yoga",
